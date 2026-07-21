@@ -1,6 +1,7 @@
-from DrissionPage import ChromiumPage, ChromiumOptions
+import requests
 import xml.etree.ElementTree as ET
 from datetime import datetime, timedelta
+import time
 
 CANTIDAD_DIAS = 3
 
@@ -23,16 +24,23 @@ def procesar_evento(prog_parent, evento):
         desc.text = evento.get("description")
 
 def generar_archivos_xml():
-    co = ChromiumOptions()
-    co.headless()
-    co.set_argument('--no-sandbox')
-    co.set_argument('--disable-gpu')
-
-    page = ChromiumPage(co)
+    session = requests.Session()
     
-    print("Navegando a DirecTV para inicializar sesión...")
-    page.get('https://www.directv.com.ar/guia/guia.aspx')
-    page.wait.load_start()
+    # Encabezados para simular un navegador real en DirecTV Argentina
+    session.headers.update({
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+        "Accept": "application/json, text/plain, */*",
+        "Accept-Language": "es-ES,es;q=0.9",
+        "Referer": "https://www.directv.com.ar/guia/guia.aspx",
+        "Origin": "https://www.directv.com.ar"
+    })
+
+    print("Inicializando conexión con DirecTV...")
+    try:
+        # Obtenemos las cookies iniciales visitando la portada de la guía
+        session.get("https://www.directv.com.ar/guia/guia.aspx", timeout=15)
+    except Exception as e:
+        print(f"Advertencia al conectar a la página principal: {e}")
 
     tv_completa = crear_estructura_xmltv()
     tv_dsports = crear_estructura_xmltv()
@@ -43,19 +51,25 @@ def generar_archivos_xml():
     hoy = datetime.now()
     fechas = [(hoy + timedelta(days=i)).strftime("%Y-%m-%d") for i in range(CANTIDAD_DIAS)]
 
-    print(f"Obteniendo programación para {CANTIDAD_DIAS} días: {', '.join(fechas)}")
+    print(f"Consultando programación para los días: {', '.join(fechas)}")
 
     for fecha in fechas:
         url_api = f"https://www.directv.com.ar/api/epg/getChannels?date={fecha}&country=AR&userType=anonymous"
         
         try:
-            res = page.s_get(url_api)
-            if res.status_code != 200:
-                print(f"⚠️ Error {res.status_code} al consultar la fecha {fecha}")
+            response = session.get(url_api, timeout=15)
+            
+            if response.status_code != 200:
+                print(f"⚠️ Error {response.status_code} al consultar la fecha {fecha}")
                 continue
 
-            data = res.json()
+            data = response.json()
             canales = data.get("response", {}).get("channels", []) if isinstance(data, dict) else []
+
+            if not canales and "channels" in data:
+                canales = data.get("channels", [])
+
+            print(f"  -> {fecha}: Obtenidos {len(canales)} canales.")
 
             for canal in canales:
                 nombre = canal.get("name", "").strip().upper()
@@ -86,19 +100,20 @@ def generar_archivos_xml():
                         prog = ET.SubElement(tv_dsports, "programme", channel=id_dsports)
                         procesar_evento(prog, evento)
 
+            time.sleep(1) # Pausa amigable entre peticiones
+
         except Exception as e:
-            print(f"❌ Error al procesar el día {fecha}: {e}")
+            print(f"❌ Error procesando {fecha}: {e}")
 
-    page.quit()
-
-    # Guardar archivos
+    # Guardar archivo EPG Completo
     tree_completa = ET.ElementTree(tv_completa)
     tree_completa.write("epg-completa.xml", encoding="utf-8", xml_declaration=True)
+    print(f"✅ 'epg-completa.xml' guardado con {len(canales_registrados_completa)} canales.")
 
+    # Guardar archivo EPG DSports
     tree_dsports = ET.ElementTree(tv_dsports)
     tree_dsports.write("epg-dsports.xml", encoding="utf-8", xml_declaration=True)
-    
-    print(" Archivos XML generados con éxito.")
+    print(f"✅ 'epg-dsports.xml' guardado con {len(canales_registrados_dsports)} canales.")
 
 if __name__ == "__main__":
     generar_archivos_xml()
