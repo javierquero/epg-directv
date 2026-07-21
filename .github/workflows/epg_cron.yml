@@ -3,24 +3,30 @@ name: Generar EPG DSports Oficial
 on:
   schedule:
     - cron: '0 6 * * *' # Todos los días a las 03:00 AM hora Argentina
-  workflow_dispatch: # Permite ejecución manual
+  workflow_dispatch:
 
 jobs:
-  run-webgrab:
+  build:
     runs-on: ubuntu-latest
 
     steps:
     - name: Checkout del repositorio
       uses: actions/checkout@v4
 
-    - name: Ejecutar WebGrab+Plus
-      run: |
-        docker run --rm \
-          -v ${{ github.workspace }}:/config \
-          -v ${{ github.workspace }}:/data \
-          m3u2htsp/webgrabplus
+    - name: Configurar Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
 
-    - name: Commit y Push del XML generado
+    - name: Instalar dependencias
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Ejecutar Extractor
+      run: python scraper.py
+
+    - name: Commit y Push del XML
       run: |
         git config --global user.name "github-actions[bot]"
         git config --global user.email "github-actions[bot]@users.noreply.github.com"
