@@ -3,55 +3,71 @@ import gzip
 import io
 import xml.etree.ElementTree as ET
 
-# Fuente consolidada de canales deportivos de Latam/Argentina (incluye DSports)
-EPG_SOURCE = "https://epgshare01.online/epgshare01/epg_ripper_AR1.xml.gz"
+# Fuentes de epgshare01 que contienen la grilla de DirecTV y DSports Latam/AR
+FUENTES_EPG = [
+    "https://epgshare01.online/epgshare01/epg_ripper_DTV1.xml.gz",
+    "https://epgshare01.online/epgshare01/epg_ripper_CL1.xml.gz"
+]
+
+KEYWORDS = ["DSPORTS", "DIRECTV SPORTS", "DS SPORTS", "DS-PORTS"]
+
+def descargar_y_descomprimir(url):
+    headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"}
+    try:
+        print(f"Descargando fuente: {url}...")
+        resp = requests.get(url, headers=headers, timeout=30)
+        if resp.status_code == 200:
+            with gzip.GzipFile(fileobj=io.BytesIO(resp.content)) as gz:
+                return gz.read()
+        else:
+            print(f"⚠️ Error {resp.status_code} al acceder a {url}")
+    except Exception as e:
+        print(f"⚠️ Excepción descargando {url}: {e}")
+    return None
 
 def extraer_dsports():
-    print("Descargando EPG de señales deportivas...")
-    headers = {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
-    }
-    
-    resp = requests.get(EPG_SOURCE, headers=headers, timeout=30)
-    if resp.status_code != 200:
-        print(f"❌ Error al descargar: Status {resp.status_code}")
-        return
-
-    # Descomprimir la fuente GZIP en memoria
-    print("Descomprimiendo y procesando XMLTV...")
-    with gzip.GzipFile(fileobj=io.BytesIO(resp.content)) as gz:
-        xml_data = gz.read()
-
-    root = ET.fromstring(xml_data)
-
     tv_dsports = ET.Element("tv")
     dsports_channel_ids = set()
 
-    # 1. Mapear y filtrar los canales de DSports (DSports, DSports 2, DSports+, DSports Motor)
-    for channel in root.findall("channel"):
-        ch_id = channel.get("id", "")
-        display_name = channel.find("display-name")
-        nombre = display_name.text.upper() if display_name is not None and display_name.text else ""
+    for url in FUENTES_EPG:
+        xml_bytes = descargar_y_descomprimir(url)
+        if not xml_bytes:
+            continue
 
-        if "DSPORTS" in nombre or "DIRECTV SPORTS" in nombre:
-            tv_dsports.append(channel)
-            dsports_channel_ids.add(ch_id)
+        print("Procesando estructura XMLTV...")
+        try:
+            root = ET.fromstring(xml_bytes)
+        except Exception as e:
+            print(f"❌ Error al parsear XML de {url}: {e}")
+            continue
 
-    print(f"Se encontraro {len(dsports_channel_ids)} canales de DSports.")
+        # 1. Buscar canales de DSports
+        for channel in root.findall("channel"):
+            ch_id = channel.get("id", "")
+            display_names = [dn.text.upper() for dn in channel.findall("display-name") if dn.text]
+            texto_busqueda = (ch_id.upper() + " " + " ".join(display_names))
 
-    # 2. Filtrar los eventos (<programme>) asociados a esos canales
-    programas_contados = 0
-    for prog in root.findall("programme"):
-        if prog.get("channel") in dsports_channel_ids:
-            tv_dsports.append(prog)
-            programas_contados += 1
+            if any(kw in texto_busqueda for kw in KEYWORDS):
+                if ch_id not in dsports_channel_ids:
+                    tv_dsports.append(channel)
+                    dsports_channel_ids.add(ch_id)
+                    print(f"  [+] Canal encontrado: ID='{ch_id}' | Nombres={display_names}")
 
-    print(f"Se procesaron {programas_contados} eventos de programación.")
+        # 2. Agregar los eventos correspondientes a esos canales
+        eventos_agregados = 0
+        for prog in root.findall("programme"):
+            if prog.get("channel") in dsports_channel_ids:
+                tv_dsports.append(prog)
+                eventos_agregados += 1
 
-    # Guardar el archivo epg-dsports.xml
+        print(f"  -> Eventos procesados para esta fuente: {eventos_agregados}")
+
+    print(f"\nTotal final de canales DSports identificados: {len(dsports_channel_ids)}")
+
+    # Guardar el archivo final
     tree = ET.ElementTree(tv_dsports)
     tree.write("epg-dsports.xml", encoding="utf-8", xml_declaration=True)
-    print("✅ 'epg-dsports.xml' generado correctamente.")
+    print("✅ Archivo 'epg-dsports.xml' generado exitosamente.")
 
 if __name__ == "__main__":
     extraer_dsports()
