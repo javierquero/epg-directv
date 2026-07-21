@@ -9,7 +9,6 @@ def crear_estructura_xmltv():
     return ET.Element("tv")
 
 def procesar_evento(prog_parent, evento):
-    # Formato de fecha para XMLTV (YYYYMMDDHHMMSS +0000)
     inicio_raw = evento.get("startTime", "").replace("-", "").replace(":", "").replace("T", " ")
     fin_raw = evento.get("endTime", "").replace("-", "").replace(":", "").replace("T", " ")
 
@@ -26,21 +25,24 @@ def procesar_evento(prog_parent, evento):
 def generar_archivos_xml():
     session = requests.Session()
     
-    # Encabezados para simular un navegador real en DirecTV Argentina
-    session.headers.update({
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+    # Headers completos imitando un navegador en Argentina
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36",
         "Accept": "application/json, text/plain, */*",
-        "Accept-Language": "es-ES,es;q=0.9",
+        "Accept-Language": "es-AR,es;q=0.9,en-US;q=0.8,en;q=0.7",
+        "Accept-Encoding": "gzip, deflate, br",
         "Referer": "https://www.directv.com.ar/guia/guia.aspx",
-        "Origin": "https://www.directv.com.ar"
-    })
+        "Origin": "https://www.directv.com.ar",
+        "Connection": "keep-alive"
+    }
+    session.headers.update(headers)
 
-    print("Inicializando conexión con DirecTV...")
+    print("Conectando a DirecTV Argentina para establecer cookies...")
     try:
-        # Obtenemos las cookies iniciales visitando la portada de la guía
-        session.get("https://www.directv.com.ar/guia/guia.aspx", timeout=15)
+        r_init = session.get("https://www.directv.com.ar/guia/guia.aspx", timeout=20)
+        print(f"Estado de conexión inicial: {r_init.status_code}")
     except Exception as e:
-        print(f"Advertencia al conectar a la página principal: {e}")
+        print(f"Advertencia al conectar: {e}")
 
     tv_completa = crear_estructura_xmltv()
     tv_dsports = crear_estructura_xmltv()
@@ -51,29 +53,39 @@ def generar_archivos_xml():
     hoy = datetime.now()
     fechas = [(hoy + timedelta(days=i)).strftime("%Y-%m-%d") for i in range(CANTIDAD_DIAS)]
 
-    print(f"Consultando programación para los días: {', '.join(fechas)}")
+    print(f"Consultando fechas: {', '.join(fechas)}")
 
     for fecha in fechas:
+        # Probamos el endpoint principal
         url_api = f"https://www.directv.com.ar/api/epg/getChannels?date={fecha}&country=AR&userType=anonymous"
         
         try:
-            response = session.get(url_api, timeout=15)
-            
-            if response.status_code != 200:
-                print(f"⚠️ Error {response.status_code} al consultar la fecha {fecha}")
+            res = session.get(url_api, timeout=20)
+            print(f"[{fecha}] HTTP Status: {res.status_code}")
+
+            if res.status_code != 200:
+                print(f"Error {res.status_code} recibiendo respuesta de la API.")
                 continue
 
-            data = response.json()
-            canales = data.get("response", {}).get("channels", []) if isinstance(data, dict) else []
+            try:
+                data = res.json()
+            except Exception as json_err:
+                print(f"Error decodificando JSON en {fecha}: {json_err}")
+                print(f"Contenido recibido (primeros 200 caracteres): {res.text[:200]}")
+                continue
 
-            if not canales and "channels" in data:
-                canales = data.get("channels", [])
+            # Extracción del listado de canales
+            canales = []
+            if isinstance(data, dict):
+                canales = data.get("response", {}).get("channels", []) or data.get("channels", [])
+            elif isinstance(data, list):
+                canales = data
 
-            print(f"  -> {fecha}: Obtenidos {len(canales)} canales.")
+            print(f"  -> {fecha}: Se encontraron {len(canales)} canales.")
 
             for canal in canales:
-                nombre = canal.get("name", "").strip().upper()
-                numero_canal = canal.get("number", "0")
+                nombre = str(canal.get("name", "")).strip().upper()
+                numero_canal = str(canal.get("number", "0"))
                 
                 # 1. PROCESAR COMPLETA
                 id_completa = f"DirecTV.{numero_canal}"
@@ -100,17 +112,16 @@ def generar_archivos_xml():
                         prog = ET.SubElement(tv_dsports, "programme", channel=id_dsports)
                         procesar_evento(prog, evento)
 
-            time.sleep(1) # Pausa amigable entre peticiones
+            time.sleep(1)
 
         except Exception as e:
-            print(f"❌ Error procesando {fecha}: {e}")
+            print(f"❌ Excepción en {fecha}: {e}")
 
-    # Guardar archivo EPG Completo
+    # Guardar archivos
     tree_completa = ET.ElementTree(tv_completa)
     tree_completa.write("epg-completa.xml", encoding="utf-8", xml_declaration=True)
     print(f"✅ 'epg-completa.xml' guardado con {len(canales_registrados_completa)} canales.")
 
-    # Guardar archivo EPG DSports
     tree_dsports = ET.ElementTree(tv_dsports)
     tree_dsports.write("epg-dsports.xml", encoding="utf-8", xml_declaration=True)
     print(f"✅ 'epg-dsports.xml' guardado con {len(canales_registrados_dsports)} canales.")
