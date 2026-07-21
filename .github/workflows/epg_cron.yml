@@ -2,9 +2,8 @@ name: Actualizar EPG DirecTV y DSports
 
 on:
   schedule:
-    # Se ejecuta todos los días a las 06:00 UTC (03:00 AM hora Argentina)
     - cron: '0 6 * * *'
-  workflow_dispatch: # Permite ejecución manual
+  workflow_dispatch:
 
 jobs:
   build:
@@ -17,7 +16,7 @@ jobs:
     - name: Configurar Python
       uses: actions/setup-python@v5
       with:
-        python-version: '3.10'
+        python-version: '3.11'
 
     - name: Instalar dependencias
       run: |
