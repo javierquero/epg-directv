@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<settings>
+  <filename>epg-dsports.xml</filename>
+  <mode>live</mode>
+  <postprocess run="n" grab="y" />
+  <logging>on</logging>
+  <retry time-out="10">2</retry>
+
+  <!-- Canales de DSports Argentina -->
+  <channel update="i" site="directv.com.ar" site_id="610" xmltv_id="DSports">DSports HD</channel>
+  <channel update="i" site="directv.com.ar" site_id="612" xmltv_id="DSports2">DSports 2 HD</channel>
+  <channel update="i" site="directv.com.ar" site_id="613" xmltv_id="DSportsPlus">DSports+ HD</channel>
+  <channel update="i" site="directv.com.ar" site_id="614" xmltv_id="DSportsMotor">DSports Motor HD</channel>
+</settings>
