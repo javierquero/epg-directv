@@ -24,7 +24,7 @@ jobs:
         pip install -r requirements.txt
 
     - name: Ejecutar Extractor
-      run: python scraper.py
+      run: python actualizar_epg.py
 
     - name: Commit y Push del XML
       run: |
