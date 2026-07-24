@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tv generator-info-name="Scraper EPG DirecTV DSports" source-info-name="DirecTV Argentina">
+  <channel id="DirecTV.631.ar">
+    <display-name>631 - DTSR</display-name>
+    <display-name>631</display-name>
+  </channel>
+  <channel id="DirecTV.901.ar">
+    <display-name>901 - DTSR</display-name>
+    <display-name>901</display-name>
+  </channel>
+  <channel id="DirecTV.1610.ar">
+    <display-name>1610 - DTSAHD</display-name>
+    <display-name>1610</display-name>
+  </channel>
+  <channel id="DirecTV.1614.ar">
+    <display-name>1614 - DTVSHD</display-name>
+    <display-name>1614</display-name>
+  </channel>
+  <channel id="DirecTV.1615.ar">
+    <display-name>1615 - DTVSHD</display-name>
+    <display-name>1615</display-name>
+  </channel>
+  <channel id="DirecTV.1616.ar">
+    <display-name>1616 - DTVSHD</display-name>
+    <display-name>1616</display-name>
+  </channel>
+  <channel id="DirecTV.1618.ar">
+    <display-name>1618 - DTVSHD</display-name>
+    <display-name>1618</display-name>
+  </channel>
+  <channel id="DirecTV.1631.ar">
+    <display-name>1631 - DTSR</display-name>
+    <display-name>1631</display-name>
+  </channel>
+  <programme start="20260724120000 -0300" stop="20260724150000 -0300" channel="DirecTV.631.ar">
+    <title lang="es">¿Cómo te va?</title>
+    <category lang="es">default</category>
+    <icon src="https://d355knccl7z6vu.cloudfront.net/programs/DTH/SH010236420000/images/IMG-A23F4236-7F65-465C-9DD4-90D7C5C083F3.jpeg"/>
+  </programme>
+  <programme start="20260724150000 -0300" stop="20260724180000 -0300" channel="DirecTV.631.ar">
+    <title lang="es">Más de una copa</title>
+    <category lang="es">Talk</category>
+    <icon src="https://dnqt2wx2urq99.cloudfront.net/ondirectv/LOGOS/Canales/AR/631.png"/>
+  </programme>
+  <programme start="20260724180000 -0300" stop="20260724211000 -0300" channel="DirecTV.631.ar">
+    <title lang="es">LPF: Racing Club vs. Gimnasia y Esgrima (LP)</title>
+    <category lang="es">Soccer</category>
+    <icon src="https://dnqt2wx2urq99.cloudfront.net/ondirectv/LOGOS/Canales/AR/631.png"/>
+  </programme>
+  <programme start="20260724211000 -0300" stop="20260724234500 -0300" channel="DirecTV.631.ar">
+    <title lang="es">LPF: Huracán vs. Banfield</title>
+    <category lang="es">Soccer</category>
+    <icon src="https://dnqt2wx2urq99.cloudfront.net/ondirectv/LOGOS/Canales/AR/631.png"/>
+  </programme>
+  <programme start="20260724234500 -0300" stop="20260725024500 -0300" channel="DirecTV.631.ar">
+    <title lang="es">DSPORTS Radio</title>
+    <category lang="es">default</category>
+    <icon src="https://dnqt2wx2urq99.cloudfront.net/ondirectv/LOGOS/Canales/AR/631.png"/>
+  </programme>
+  <programme start="20260724120000 -0300" stop="20260724150000 -0300" channel="DirecTV.901.ar">
+    <title lang="es">¿Cómo te va?</title>
+    <category lang="es">default</category>
+    <icon src="https://d355knccl7z6vu.cloudfront.net/programs/DTH/SH010236420000/images/IMG-A23F4236-7F65-465C-9DD4-90D7C5C083F3.jpeg"/>
+  </programme>
+  <programme start="20260724150000 -0300" stop="20260724180000 -0300" channel="DirecTV.901.ar">
+    <title lang="es">Más de una copa</title>
+    <category lang="es">Talk</category>
+    <icon src="https://dnqt2wx2urq99.cloudfront.net/ondirectv/LOGOS/Canales/AR/901.png"/>
+  </programme>
+  <programme start="20260724180000 -0300" stop="20260724211000 -0300" channel="DirecTV.901.ar">
+    <title lang="es">LPF: Racing Club vs. Gimnasia y Esgrima (LP)</title>
+    <category lang="es">Soccer</category>
+    <icon src="https://dnqt2wx2urq99.cloudfront.net/ondirectv/LOGOS/Canales/AR/901.png"/>
+  </programme>
+  <programme start="20260724211000 -0300" stop="20260724234500 -0300" channel="DirecTV.901.ar">
+    <title lang="es">LPF: Huracán vs. Banfield</title>
+    <category lang="es">Soccer</category>
+    <icon src="https://dnqt2wx2urq99.cloudfront.net/ondirectv/LOGOS/Canales/AR/901.png"/>
+  </programme>
+  <programme start="20260724234500 -0300" stop="20260725024500 -0300" channel="DirecTV.901.ar">
+    <title lang="es">DSPORTS Radio</title>
+    <category lang="es">default</category>
+    <icon src="https://dnqt2wx2urq99.cloudfront.net/ondirectv/LOGOS/Canales/AR/901.png"/>
+  </programme>
+  <programme start="20260724110000 -0300" stop="20260724130000 -0300" channel="DirecTV.1610.ar">
+    <title lang="es">DSPORTS Noticias</title>
+    <category lang="es">Talk</category>
+    <icon src="https://d355knccl7z6vu.cloudfront.net/programs/DTH/SH010259120000/images/IMG-D89D9D41-D3A2-4833-B93A-74E926EABFC2.jpeg"/>
+  </programme>
+  <programme start="20260724130000 -0300" stop="20260724133000 -0300" channel="DirecTV.1610.ar">
+    <title lang="es">CONMEBOL Sudamericana: Boca Juniors vs. O'higgins</title>
+    <category lang="es">default</category>
+    <icon src="https://dnqt2wx2urq99.cloudfront.net/ondirectv/LOGOS/Canales/AR/1610.png"/>
+  </programme>
+  <programme start="20260724133000 -0300" stop="20260724140000 -0300" channel="DirecTV.1610.ar">
+    <title lang="es">CONMEBOL Sudamericana: Lanús vs. Cienciano</title>
+    <category lang="es">default</category>
+    <icon src="https://dnqt2wx2urq99.cloudfront.net/ondirectv/LOGOS/Canales/AR/1610.png"/>
+  </programme>
+  <programme start="20260724140000 -0300" stop="20260724143000 -0300" channel="DirecTV.1610.ar">
+    <title lang="es">CONMEBOL Sudamericana: Nacional vs. Tigre</title>
+    <category lang="es">default</category>
+    <icon src="https://dnqt2wx2urq99.cloudfront.net/ondirectv/LOGOS/Canales/AR/1610.png"/>
+  </programme>
+  <programme start="20260724143000 -0300" stop="20260724150000 -0300" channel="DirecTV.1610.ar">
+    <title lang="es">CONMEBOL Sudamericana: Boca Juniors vs. O'higgins</title>
+    <category lang="es">default</category>
+    <icon src="https://dnqt2wx2urq99.cloudfront.net/ondirectv/LOGOS/Canales/AR/1610.png"/>
+  </programme>
+  <programme start="20260724150000 -0300" stop="20260724170000 -0300" channel="DirecTV.1610.ar">
+    <title lang="es">DSPORTS Noticias</title>
+    <category lang="es">Talk</category>
+    <icon src="https://d355knccl7z6vu.cloudfront.net/programs/DTH/SH010259120000/images/IMG-D89D9D41-D3A2-4833-B93A-74E926EABFC2.jpeg"/>
+  </programme>
+  <programme start="20260724170000 -0300" stop="20260724190000 -0300" channel="DirecTV.1610.ar">
+    <title lang="es">Nacional vs. Tigre</title>
+    <category lang="es">Soccer</category>
+    <icon src="https://d355knccl7z6vu.cloudfront.net/programs/DTH/EP010017601168/images/IMG-31D241FB-FD7E-4943-B911-96FF45BCEF22.jpeg"/>
+  </programme>
+  <programme start="20260724190000 -0300" stop="20260724210000 -0300" channel="DirecTV.1610.ar">
+    <title lang="es">Lanús vs. Cienciano</title>
+    <category lang="es">Soccer</category>
+    <icon src="https://d355knccl7z6vu.cloudfront.net/programs/DTH/EP010017601173/images/IMG-C5E718D2-28AB-4567-9C9B-D06D563A02A0.jpeg"/>
+  </programme>
+  <programme start="20260724210000 -0300" stop="20260724220000 -0300" channel="DirecTV.1610.ar">
+    <title lang="es">Magazine CONMEBOL Sudamericana</title>
+    <category lang="es">Soccer</category>
+    <icon src="https://dnqt2wx2urq99.cloudfront.net/ondirectv/LOGOS/Canales/AR/1610.png"/>
+  </programme>
+  <programme start="20260724220000 -0300" stop="20260725000000 -0300" channel="DirecTV.1610.ar">
+    <title lang="es">DSPORTS Noticias Nite</title>
+    <category lang="es">Talk</category>
+    <icon src="https://d355knccl7z6vu.cloudfront.net/programs/DTH/SH010643730000/images/IMG-BE992879-11F5-4CD1-A645-096140F85F49.jpeg"/>
+  </programme>
+  <programme start="20260724110000 -0300" stop="20260724150000 -0300" channel="DirecTV.1614.ar">
+    <title lang="es">DSPORTS</title>
+    <category lang="es">default</category>
+    <icon src="https://dnqt2wx2urq99.cloudfront.net/ondirectv/LOGOS/Canales/AR/1614.png"/>
+  </programme>
+  <programme start="20260724150000 -0300" stop="20260724190000 -0300" channel="DirecTV.1614.ar">
+    <title lang="es">DSPORTS</title>
+    <category lang="es">default</category>
+    <icon src="https://dnqt2wx2urq99.cloudfront.net/ondirectv/LOGOS/Canales/AR/1614.png"/>
+  </programme>
+  <programme start="20260724190000 -0300" stop="20260724230000 -0300" channel="DirecTV.1614.ar">
+    <title lang="es">DSPORTS</title>
+    <category lang="es">default</category>
+    <icon src="https://dnqt2wx2urq99.cloudfront.net/ondirectv/LOGOS/Canales/AR/1614.png"/>
+  </programme>
+  <programme start="20260724230000 -0300" stop="20260725030000 -0300" channel="DirecTV.1614.ar">
+    <title lang="es">DSPORTS</title>
+    <category lang="es">default</category>
+    <icon src="https://dnqt2wx2urq99.cloudfront.net/ondirectv/LOGOS/Canales/AR/1614.png"/>
+  </programme>
+  <programme start="20260724120000 -0300" stop="20260724180000 -0300" channel="DirecTV.1615.ar">
+    <title lang="es">DSPORTS</title>
+    <category lang="es">Special</category>
+    <icon src="https://d355knccl7z6vu.cloudfront.net/programs/DTH/SH010151230000/images/IMG-E68AF46F-51DE-42A2-8D74-BC1BF803E47A.jpeg"/>
+  </programme>
+  <programme start="20260724180000 -0300" stop="20260725000000 -0300" channel="DirecTV.1615.ar">
+    <title lang="es">DSPORTS</title>
+    <category lang="es">Special</category>
+    <icon src="https://d355knccl7z6vu.cloudfront.net/programs/DTH/SH010151230000/images/IMG-E68AF46F-51DE-42A2-8D74-BC1BF803E47A.jpeg"/>
+  </programme>
+  <programme start="20260724110000 -0300" stop="20260724150000 -0300" channel="DirecTV.1616.ar">
+    <title lang="es">DSPORTS</title>
+    <category lang="es">default</category>
+    <icon src="https://dnqt2wx2urq99.cloudfront.net/ondirectv/LOGOS/Canales/AR/1616.png"/>
+  </programme>
+  <programme start="20260724150000 -0300" stop="20260724190000 -0300" channel="DirecTV.1616.ar">
+    <title lang="es">DSPORTS</title>
+    <category lang="es">default</category>
+    <icon src="https://dnqt2wx2urq99.cloudfront.net/ondirectv/LOGOS/Canales/AR/1616.png"/>
+  </programme>
+  <programme start="20260724190000 -0300" stop="20260724230000 -0300" channel="DirecTV.1616.ar">
+    <title lang="es">DSPORTS</title>
+    <category lang="es">default</category>
+    <icon src="https://dnqt2wx2urq99.cloudfront.net/ondirectv/LOGOS/Canales/AR/1616.png"/>
+  </programme>
+  <programme start="20260724230000 -0300" stop="20260725030000 -0300" channel="DirecTV.1616.ar">
+    <title lang="es">DSPORTS</title>
+    <category lang="es">default</category>
+    <icon src="https://dnqt2wx2urq99.cloudfront.net/ondirectv/LOGOS/Canales/AR/1616.png"/>
+  </programme>
+  <programme start="20260724110000 -0300" stop="20260724150000 -0300" channel="DirecTV.1618.ar">
+    <title lang="es">DSPORTS</title>
+    <category lang="es">default</category>
+    <icon src="https://dnqt2wx2urq99.cloudfront.net/ondirectv/LOGOS/Canales/AR/1618.png"/>
+  </programme>
+  <programme start="20260724150000 -0300" stop="20260724190000 -0300" channel="DirecTV.1618.ar">
+    <title lang="es">DSPORTS</title>
+    <category lang="es">default</category>
+    <icon src="https://dnqt2wx2urq99.cloudfront.net/ondirectv/LOGOS/Canales/AR/1618.png"/>
+  </programme>
+  <programme start="20260724190000 -0300" stop="20260724230000 -0300" channel="DirecTV.1618.ar">
+    <title lang="es">DSPORTS</title>
+    <category lang="es">default</category>
+    <icon src="https://dnqt2wx2urq99.cloudfront.net/ondirectv/LOGOS/Canales/AR/1618.png"/>
+  </programme>
+  <programme start="20260724230000 -0300" stop="20260725030000 -0300" channel="DirecTV.1618.ar">
+    <title lang="es">DSPORTS</title>
+    <category lang="es">default</category>
+    <icon src="https://dnqt2wx2urq99.cloudfront.net/ondirectv/LOGOS/Canales/AR/1618.png"/>
+  </programme>
+  <programme start="20260724120000 -0300" stop="20260724150000 -0300" channel="DirecTV.1631.ar">
+    <title lang="es">¿Cómo te va?</title>
+    <category lang="es">default</category>
+    <icon src="https://d355knccl7z6vu.cloudfront.net/programs/DTH/SH010236420000/images/IMG-A23F4236-7F65-465C-9DD4-90D7C5C083F3.jpeg"/>
+  </programme>
+  <programme start="20260724150000 -0300" stop="20260724180000 -0300" channel="DirecTV.1631.ar">
+    <title lang="es">Más de una copa</title>
+    <category lang="es">Talk</category>
+    <icon src="https://dnqt2wx2urq99.cloudfront.net/ondirectv/LOGOS/Canales/AR/1631.png"/>
+  </programme>
+  <programme start="20260724180000 -0300" stop="20260724211000 -0300" channel="DirecTV.1631.ar">
+    <title lang="es">LPF: Racing Club vs. Gimnasia y Esgrima (LP)</title>
+    <category lang="es">Soccer</category>
+    <icon src="https://dnqt2wx2urq99.cloudfront.net/ondirectv/LOGOS/Canales/AR/1631.png"/>
+  </programme>
+  <programme start="20260724211000 -0300" stop="20260724234500 -0300" channel="DirecTV.1631.ar">
+    <title lang="es">LPF: Huracán vs. Banfield</title>
+    <category lang="es">Soccer</category>
+    <icon src="https://dnqt2wx2urq99.cloudfront.net/ondirectv/LOGOS/Canales/AR/1631.png"/>
+  </programme>
+  <programme start="20260724234500 -0300" stop="20260725024500 -0300" channel="DirecTV.1631.ar">
+    <title lang="es">DSPORTS Radio</title>
+    <category lang="es">default</category>
+    <icon src="https://dnqt2wx2urq99.cloudfront.net/ondirectv/LOGOS/Canales/AR/1631.png"/>
+  </programme>
+</tv>
